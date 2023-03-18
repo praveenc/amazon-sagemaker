@@ -12,7 +12,6 @@ region = session._region_name
 account_id = boto3.client('sts').get_caller_identity().get('Account')
 bucket = session.default_bucket()
 role = get_execution_role()
-# role = "arn:aws:iam::726793866085:role/service-role/AmazonSageMaker-ExecutionRole-20220313T104021"
 prefix = "sagemaker/abalone"
 
 base_s3uri = s3_path_join(f"s3://{bucket}", prefix)
@@ -62,4 +61,8 @@ xgb_estimator.fit(
         "validation": TrainingInput(s3_data=val_input, content_type="text/csv"),
     },
     job_name=train_job_name,
+<<<<<<< HEAD
 )
+=======
+)
+>>>>>>> 09012be (Sagemaker BYOC training container localmode + sm: works)
