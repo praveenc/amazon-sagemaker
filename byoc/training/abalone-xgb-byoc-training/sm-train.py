@@ -61,8 +61,4 @@ xgb_estimator.fit(
         "validation": TrainingInput(s3_data=val_input, content_type="text/csv"),
     },
     job_name=train_job_name,
-<<<<<<< HEAD
 )
-=======
-)
->>>>>>> 09012be (Sagemaker BYOC training container localmode + sm: works)
