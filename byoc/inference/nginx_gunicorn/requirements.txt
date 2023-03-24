@@ -1,0 +1,9 @@
+numpy
+pandas
+flask
+gevent
+gunicorn
+xgboost
+scikit-learn
+sagemaker-inference
+retrying
