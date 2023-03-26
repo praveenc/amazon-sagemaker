@@ -10,13 +10,13 @@ from uuid import uuid4
 
 
 local_session = LocalSession()
-local_session.config = {'local': {'local_code': True}}
+local_session.config = {"local": {"local_code": True}}
 
 DATADIR = os.path.abspath("./data/abalone.csv")
 
 dataset_uri = pathlib.Path(DATADIR).as_uri()
 
-role = 'arn:aws:iam::111111111111:role/service-role/AmazonSageMaker-ExecutionRole-20230101T000001'
+role = "arn:aws:iam::111111111111:role/service-role/AmazonSageMaker-ExecutionRole-20230101T000001"
 
 print(f"Role: {role}")
 print(f"Dataset URI: {dataset_uri}")
@@ -24,15 +24,16 @@ print(f"Dataset URI: {dataset_uri}")
 train_input = pathlib.Path(os.path.abspath("./data/train.csv")).as_uri()
 val_input = pathlib.Path(os.path.abspath("./data/validation.csv")).as_uri()
 
-model_output_uri =  pathlib.Path(os.path.abspath("./models")).as_uri()
+model_output_uri = pathlib.Path(os.path.abspath("./models")).as_uri()
 
 xgb_estimator = Estimator(
-                      image_uri="abalone-train",
-                      role=role,
-                      train_instance_count=1,
-                      train_instance_type="local",
-                      output_path=model_output_uri,
-                      sagemaker_session=local_session)
+    image_uri="abalone-train",
+    role=role,
+    train_instance_count=1,
+    train_instance_type="local",
+    output_path=model_output_uri,
+    sagemaker_session=local_session,
+)
 
 xgb_estimator.set_hyperparameters(
     objective="reg:squarederror",

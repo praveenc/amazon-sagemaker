@@ -23,6 +23,7 @@ from sklearn.preprocessing import LabelEncoder, OneHotEncoder, StandardScaler
 prefix = "/opt/ml/"
 model_path = os.path.join(prefix, "model")
 
+
 # A singleton for holding the model. This simply loads the model and holds it.
 class MyAbaloneInference(object):
     VALID_CONTENT_TYPES = (content_types.CSV, content_types.NPY)
@@ -192,15 +193,13 @@ def predictions():
         else:
             print(f"Trying with class method")
             predictions = MyAbaloneInference.predict(transformed_input)
-        
+
         print(f"Predictions obj")
         print(type(predictions))
         if isinstance(predictions, np.ndarray):
             predictions = predictions.tolist()
         out = StringIO()
-        pd.DataFrame({"results": predictions}).to_csv(
-            out, header=False, index=False
-        )
+        pd.DataFrame({"results": predictions}).to_csv(out, header=False, index=False)
         result = out.getvalue()
     else:
         return flask.Response(

@@ -2,6 +2,7 @@ from sagemaker.estimator import Estimator
 from sagemaker.inputs import TrainingInput
 from datetime import datetime
 from uuid import uuid4
+
 # from rich import print
 import boto3
 from sagemaker import Session, get_execution_role
@@ -9,7 +10,7 @@ from sagemaker.s3 import S3Uploader, s3_path_join
 
 session = Session()
 region = session._region_name
-account_id = boto3.client('sts').get_caller_identity().get('Account')
+account_id = boto3.client("sts").get_caller_identity().get("Account")
 bucket = session.default_bucket()
 role = get_execution_role()
 prefix = "sagemaker/abalone"

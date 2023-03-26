@@ -40,6 +40,7 @@ logging.basicConfig(level=logging.INFO)
 TRAIN_VALIDATION_FRACTION = 0.2
 RANDOM_STATE_SAMPLING = 200
 
+
 def prepare_data(train_dir, validation_dir):
     """Read data from train and validation channel, and return predicting features and target variables.
 
@@ -86,7 +87,6 @@ def prepare_data(train_dir, validation_dir):
     return X_train.values, y_train.values, X_val.values, y_val.values
 
 
-
 def train():
     try:
         print("\nRunning training...")
@@ -130,25 +130,23 @@ def train():
 
         # get the folder where the model should be saved
         model_dir = env.model_dir
-        
+
         print(f"Training DIR: {training_dir}")
         print(f"Model DIR: {model_dir}")
-        
+
         """Run training."""
         parser = argparse.ArgumentParser()
 
-        parser.add_argument(
-            "--max_depth",
-            type=int,
-            default=5
-        )
+        parser.add_argument("--max_depth", type=int, default=5)
         parser.add_argument("--eta", type=float)
         parser.add_argument("--gamma", type=int)
         parser.add_argument("--min_child_weight", type=int, default=6)
         parser.add_argument("--subsample", type=float, default=0.7)
         parser.add_argument("--verbosity", type=int)
         parser.add_argument("--objective", type=str, default="reg:squarederror")
-        parser.add_argument("--num_round", type=int,default=hyperparameters['num_round'])
+        parser.add_argument(
+            "--num_round", type=int, default=hyperparameters["num_round"]
+        )
         parser.add_argument("--tree_method", type=str, default="auto")
         parser.add_argument("--predictor", type=str, default="auto")
         parser.add_argument("--learning_rate", type=float, default="0.01")
@@ -156,7 +154,9 @@ def train():
             "--output_data_dir", type=str, default=os.environ.get("SM_OUTPUT_DATA_DIR")
         )
         parser.add_argument("--model_dir", type=str, default=env.model_dir)
-        parser.add_argument("--train", type=str, default=env.channel_input_dirs["train"])
+        parser.add_argument(
+            "--train", type=str, default=env.channel_input_dirs["train"]
+        )
         parser.add_argument(
             "--validation", type=str, default=env.channel_input_dirs["validation"]
         )
