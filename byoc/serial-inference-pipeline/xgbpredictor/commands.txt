@@ -1,0 +1,6 @@
+
+dk build -t featurizer . && dk image prune -f && dk run --rm -v $(pwd)/models:/opt/ml/model -p 8080:8080 featurizer
+
+curl http://localhost:8080/ping
+
+curl --data-raw '-1.3317586042173168,-1.1425409076053987,-1.0579488602777858,-1.177706547272754,-1.130662184748842,-1.1493955859050584,-1.139968767909096,0.0,1.0,0.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
