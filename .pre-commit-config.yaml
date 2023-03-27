@@ -1,0 +1,20 @@
+repos:
+  - repo: https://github.com/psf/black
+    rev: 23.1.0 # Update to the latest version
+    hooks:
+      - id: black
+        types: [python]
+
+  - repo: https://github.com/tomcatling/black-nb
+    rev: v0.7 # Update to the latest version
+    hooks:
+      - id: black-nb
+        types: [jupyter]
+
+  - repo: local
+    hooks:
+      - id: nbconvert-clear-output
+        name: Clear Jupyter Notebook Outputs
+        language: system
+        files: \.ipynb$
+        entry: jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace
