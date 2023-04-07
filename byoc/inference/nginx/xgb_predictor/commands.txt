@@ -1,0 +1,24 @@
+
+dk build -t xgbpredictor . && dk image prune -f && dk run --rm -v $(pwd)/models:/opt/ml/model -p 
+8080:8080 xgbpredictor
+
+dk run --rm -v $(pwd)/models:/opt/ml/model -p 8080:8080 xgbpredictor
+
+curl http://localhost:8080/ping
+
+curl --data-raw '-1.3317586042173168,-1.1425409076053987,-1.0579488602777858,-1.177706547272754,-1.130662184748842,-1.1493955859050584,-1.139968767909096,0.0,1.0,0.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
+
+curl --data-raw '0.3831484115366887,0.4748533892842405,0.2506716146449868,0.5674905932383428,0.8138932119974298,0.6788834503655224,0.22393875313148354,1.0,0.0,0.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
+
+
+curl --data-raw '-0.03324573832379023,0.021352297818588113,0.728888255143781,0.08516267380587607,0.06367821045408265,0.35041967853367667,0.08024614607656821,1.0,0.0,0.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
+
+curl --data-raw 'I,0.365,0.295,0.095,0.25,0.1075,0.0545,0.08,9.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
+
+curl --data-raw 'M,0.59,0.44,0.15,0.8725,0.387,0.215,0.245,8.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
+
+curl --data-raw 'M,0.59,0.44,0.15,0.8725,0.387,0.215,0.245' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
+
+curl --data-raw 'F,0.585,0.465,0.145,0.9855,0.4325,0.2145,0.2845,10.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
+
+curl --data-raw 'I,0.365,0.295,0.095,0.25,0.1075,0.0545,0.08,9.0' -H 'Content-Type: text/csv' -v http://localhost:8080/invocations
